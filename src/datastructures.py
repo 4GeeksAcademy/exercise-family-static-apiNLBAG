@@ -27,14 +27,12 @@ class FamilyStructure:
         return generated_id
 
     def add_member(self, member):
-        # Asignar ID si no fue proporcionado
         if "id" not in member:
             member["id"] = self._generate_id()
         member["last_name"] = self.last_name
         self._members.append(member)
 
     def delete_member(self, id):
-        # Eliminar si existe (silenciosamente si no)
         self._members = [m for m in self._members if m["id"] != id]
 
     def get_member(self, id):

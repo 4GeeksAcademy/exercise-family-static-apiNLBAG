@@ -4,7 +4,6 @@ from flask import Flask
 # 🔧 Agregar src al path para que se pueda importar correctamente
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-# ✅ Importar app correctamente desde src.app
 from src.app import app
 
 

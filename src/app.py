@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from .datastructures import FamilyStructure  # ✅ Import relativo
+from .datastructures import FamilyStructure  
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -34,7 +34,7 @@ def add_member():
             return jsonify({"error": "Faltan campos requeridos"}), 400
 
         jackson_family.add_member(member_data)
-        return jsonify(member_data), 200  # ✅ Devuelve el objeto con ID
+        return jsonify(member_data), 200 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -50,6 +50,5 @@ def delete_member(member_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# ✅ Bloque para ejecutar correctamente con `python -m src.app`
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
