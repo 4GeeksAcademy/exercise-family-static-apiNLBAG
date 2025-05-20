@@ -1,0 +1,70 @@
+{
+  "info": {
+    "name": "Jackson Family API",
+    "_postman_id": "12345678-abcd-ef00-1234-abcdef000000",
+    "description": "Colección para probar los endpoints de la familia Jackson",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET - Todos los miembros",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/members",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["members"]
+        }
+      }
+    },
+    {
+      "name": "GET - Miembro por ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/members/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["members", "1"]
+        }
+      }
+    },
+    {
+      "name": "POST - Agregar nuevo miembro",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"first_name\": \"Tommy\",\n  \"age\": 23,\n  \"lucky_numbers\": [1, 2, 3]\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/members",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["members"]
+        }
+      }
+    },
+    {
+      "name": "DELETE - Eliminar miembro por ID",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/members/4",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["members", "4"]
+        }
+      }
+    }
+  ]
+}

@@ -1,17 +1,21 @@
 import pytest, os, sys, tempfile, mock, json
 from flask import Flask
 
+# 🔧 Agregar src al path para que se pueda importar correctamente
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+# ✅ Importar app correctamente desde src.app
+from src.app import app
+
 
 @pytest.fixture
 def client():
-    with mock.patch('flask.Flask', lambda x: Flask(x)):
-        from app import app
-        db_fd, app.config['DATABASE'] = tempfile.mkstemp()
-        app.config['TESTING'] = True
-        with app.test_client() as client:
-            yield client
-        os.close(db_fd)
-        os.unlink(app.config['DATABASE'])
+    db_fd, app.config['DATABASE'] = tempfile.mkstemp()
+    app.config['TESTING'] = True
+    with app.test_client() as client:
+        yield client
+    os.close(db_fd)
+    os.unlink(app.config['DATABASE'])
 
 
 @pytest.mark.it("The Family structure must be initialized with the 3 members specified in the instructions")
@@ -99,8 +103,8 @@ def test_get_single_member_has_keys(client):
     data = json.loads(response.data)
 
     assert data is not None, "The dictionary returned by GET /members/<int:id> should contain the keys: [first_name, id, age, lucky_numbers]"
-    assert "first_name" in data, "The dictionary returned by GET /members/<int:id> should contain the keys: [first_name, id, age, lucky_numbers]"
-    assert "id" in data, "The dictionary returned by GET /members/<int:id> should contain the keys: [first_name, id, age, lucky_numbers]"
+    assert "first_name" in data
+    assert "id" in data
     assert "age" in data
     assert "lucky_numbers" in data
 
